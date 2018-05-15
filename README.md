@@ -1,1 +1,2 @@
-# recipeApp
+# RecipeApp
+Recipe App
