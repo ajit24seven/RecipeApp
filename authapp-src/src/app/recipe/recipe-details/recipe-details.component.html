@@ -1,0 +1,40 @@
+<div class="row" *ngIf="recipes">
+    <div class="col-sm-3">
+        <div class="card card-custom">
+            <figure><img  [src]="recipes.image_url" alt="" /></figure>
+        </div>
+    </div>
+    <div class="col">
+        <h2>{{recipes.title}}</h2>
+          <div>
+             <ul>
+                <li>Prep Time <strong>{{recipes.prep_time}}</strong></li>
+                <li>Cook Time <strong>{{recipes.cook_time}}</strong></li>
+                <li>Serving <strong> For {{recipes.servings}} People </strong></li>
+                <li>Difficulty <strong> Easy </strong></li>
+             </ul>
+          </div>
+          <hr />
+          <div>
+              <h3>Description</h3>
+              <p>{{recipes.description}}</p>
+           </div>
+           <div *ngIf="recipes.ingredients">
+           <h3>Recipe Ingredient</h3>
+            <ul>
+               <li *ngFor="let ingredient of recipes.ingredients" >
+                    {{ingredient}}
+               </li>
+            </ul>
+          </div>
+          <div *ngIf="recipes.directions"></div>
+            <h3>Instructions</h3>
+            <div>
+               <ol style="list-style: none; padding-left: 22px">
+                  <li style="padding-left: 0; margin: 0" *ngFor="let direction of recipes.directions let i=index" >
+                    <b>Step{{i+1}}</b> -  {{direction}}
+               </li>
+               </ol>
+               </div>
+    </div>
+</div>

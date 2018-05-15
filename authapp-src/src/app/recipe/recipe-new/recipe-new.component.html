@@ -1,0 +1,224 @@
+
+<form role="form" [formGroup]="rForm" (ngSubmit)="onSubmitNewRecipe()" ngNativeValidate>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card card-custom">
+                <img alt="100%x200" data-src="holder.js/100%x200" [src]="filePaths" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;"> 
+                <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" filetypefilter="video"  />
+                <input type="text" class="form-control" [(ngModel)]="imagePath" formControlName="image_url" /> 
+
+                <div class="caption" *ngFor="let item of uploader.queue">
+                    <div class="progress" style="margin-bottom: 0;">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                    <p class="text-center">
+                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                    </p>
+                    <button type="button" class="btn btn-success"
+                    (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                    <span class="glyphicon glyphicon-upload"></span> Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group inline">
+                        <label for="new-title">Title</label>
+                        <div class="input">
+                            <input type="text" class="form-control" ng-required="required" formControlName="title" id="new-title">
+                            <label class="error-messages" *ngIf="!rForm.get('title').valid && rForm.get('title').touched" >{{errMsg.required}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="new-description">Description</label>
+                        <textarea class="form-control" id="new-description" formControlName="description" rows="3"></textarea>
+                        <label class="error-messages" *ngIf="!rForm.get('description').valid && rForm.get('description').touched" >{{errMsg.required}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="new-Cuisines">Cuisines</label>
+                                <select class="form-control" id="new-Cuisines" formControlName="cuisines">
+                                    <option>North Indian</option>
+                                    <option>South Indian</option>
+                                    <option>Maharashtrian</option>
+                                    <option>Gujarati</option>
+                                    <option>Goa/Konkani</option>
+                                </select>
+                                <label class="error-messages" *ngIf="!rForm.get('cuisines').valid && rForm.get('cuisines').touched" >{{errMsg.required}}</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="new-Category">Category</label>
+                                <select class="form-control" id="new-category" formControlName="category">
+                                    <option>Veg</option>
+                                    <option>Non Veg</option>
+                                </select>
+                                <label class="error-messages" *ngIf="!rForm.get('category').valid && rForm.get('category').touched" >{{errMsg.required}}</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="new-Subcategory">Subcategory</label>
+                                <select class="form-control" id="new-subcategory" formControlName="subcategory">
+                                    <option>Lunch</option>
+                                    <option>Dinner</option>
+                                </select>
+                                <label class="error-messages" *ngIf="!rForm.get('subcategory').valid && rForm.get('subcategory').touched" >{{errMsg.required}}</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="new-Microcategory">Microcategory</label>
+                                <select class="form-control" id="new-microcategory" formControlName="microcategory">
+                                    <option>Rice</option>
+                                    <option>Non Veg</option>
+                                </select>
+                                <label class="error-messages" *ngIf="!rForm.get('microcategory').valid && rForm.get('microcategory').touched" >{{errMsg.required}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="new-prep">Prep Time</label>
+                                <input type="time" class="form-control without" id="new-prep" name="appt-time" min="12:00" max="18:00" formControlName="prep_time">
+                                <label class="error-messages" *ngIf="!rForm.get('prep_time').valid && rForm.get('prep_time').touched" >{{errMsg.required}}</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="new-cook">Cook Time</label>
+                                <input type="time" class="form-control without" id="new-cook" name="appt-time" min="12:00" max="18:00" formControlName="cook_time">
+                                <label class="error-messages" *ngIf="!rForm.get('cook_time').valid && rForm.get('cook_time').touched" >{{errMsg.required}}</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="new-extra">Extra Time</label>
+                                <input type="time" class="form-control without" id="new-extra" name="appt-time" min="12:00" max="18:00" formControlName="extra_time">
+                                <label class="error-messages" *ngIf="!rForm.get('extra_time').valid && rForm.get('extra_time').touched" >{{errMsg.required}}</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="new-ready">Ready In</label>
+                                <input type="time" class="form-control without" id="new-ready" name="appt-time" min="12:00" max="18:00" formControlName="ready_time">
+                                <label class="error-messages" *ngIf="!rForm.get('ready_time').valid && rForm.get('ready_time').touched" >{{errMsg.required}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group inline">
+                                <label for="new-serving">Servings</label>
+                                <div class="input">
+                                    <input type="number" class="form-control" id="new-serving" type="number" name="quantity" min="0" max="100" step="1" value="30" formControlName="servings" >
+                                    <label class="error-messages" *ngIf="!rForm.get('servings').valid && rForm.get('servings').touched" >{{errMsg.required}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="new-private">Is Private</label>
+                                <select class="form-control" id="new-private" formControlName="private" >
+                                    <option>True</option>
+                                    <option>False</option>
+                                </select>
+                                <label class="error-messages" *ngIf="!rForm.get('private').valid && rForm.get('private').touched" >{{errMsg.required}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="example-number-input">Ingredients</label>
+                            <div class="card" formArrayName = "ingredients">
+                                <div class="card-header">
+                                    <textarea type="text" class="form-control" #ingredientValue placeholder="Add Ingredients" ></textarea>
+                                    <div class="text-right" >
+                                        <button 
+                                        class="btn btn-secondary bottomAction" 
+                                        type="button"
+                                        (click)="ingredients(ingredientValue.value);ingredientValue.value=''"
+                                        >Add Ingredient</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="card-body">
+                                    <div class="input-group" style="padding:5px 0" *ngFor="let ingredient of rForm.get('ingredients').controls; let i=index">
+                                       Step {{i+1}} <textarea type="text" class="form-control" [formControlName]="i" value="ingredient" ></textarea>
+                                        <span class="input-group-btn">
+                                            <button 
+                                            class="btn btn-danger" 
+                                            type="button"
+                                            (click)="deleteRow(i, 'ingredients')"
+                                            >X</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="example-number-input">Directions</label>
+                            <div class="card" formArrayName = "directions">
+                                <div class="card-header">
+                                    <textarea type="text" class="form-control" #directionsValue placeholder="Add Directions" ></textarea>
+                                    <div class="text-right" >
+                                        <button 
+                                        class="btn btn-secondary bottomAction" 
+                                        
+                                        type="button"
+                                        (click)="directions(directionsValue.value);directionsValue.value=''"
+                                        >Add Directions</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="card-body">
+                                    <div class="input-group" style="padding:5px 0" *ngFor="let direction of rForm.get('directions').controls; let i=index">
+                                       Step {{i+1}} <textarea type="text" class="form-control" [formControlName]="i" value="direction" ></textarea>
+                                        <span class="input-group-btn">
+                                            <button 
+                                            class="btn btn-danger" 
+                                            type="button"
+                                            (click)="deleteRow(i, 'directions')"
+                                            >X</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-right">
+
+                    <button  class="btn btn-info bottomAction" type="submit" role="button">Add Recipe</button>
+                    <button *ngIf="isEdit" class="btn btn-info bottomAction" (click)="updateRecipe()" type="button" role="button">Update Recipe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

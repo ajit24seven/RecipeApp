@@ -1,0 +1,23 @@
+{
+  "name": "meanauthapp",
+  "version": "1.0.0",
+  "description": "Mean Auth App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "cors": "2.8.3",
+    "express": "*",
+    "jsonwebtoken": "7.4.1",
+    "mongoose": "4.10.6",
+    "multer": "^1.3.0",
+    "passport": "0.3.2",
+    "passport-jwt": "2.2.1"
+  },
+  "author": "Ajit Giri",
+  "license": "ISC"
+}

@@ -1,0 +1,17 @@
+
+<a [routerLink]="['new']" *ngIf="authService.loggedIn()" style="margin:10px 0;" class="btn btn-info pull-right">Add Recipe</a>
+<div class="row" *ngIf="recipes">
+    <div class="col-sm-6 col-md-3"  *ngFor="let recipe of recipes">
+      <div class="card card-custom">
+          <a [routerLink]="[recipe._id]">
+          <img [alt]="recipe.title" [src]="recipe.image_url" >
+          </a>
+          <h4>{{recipe.title}}</h4>
+          <p class="card-text">{{recipe.description}}</p>
+          <div *ngIf="authService.loggedIn()">
+              <button class="btn btn-sm btn-info" [routerLink]="[recipe._id,'edit']" role="button">Edit Recipe</button> 
+              <button class="btn btn-sm btn-secondary" (click)="deleteRecipeItem(recipe._id)" role="button">Delete Recipe</button> 
+          </div>
+        </div>
+      </div>
+</div>
