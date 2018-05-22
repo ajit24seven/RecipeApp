@@ -109,7 +109,9 @@ footer p {
     border: 1px solid red;
   }
 
-  
+.error{
+  border:1px solid red !important
+}
 
 
 .sidebar {

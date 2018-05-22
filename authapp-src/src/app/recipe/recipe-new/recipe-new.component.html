@@ -2,10 +2,10 @@
 <form role="form" [formGroup]="rForm" (ngSubmit)="onSubmitNewRecipe()" ngNativeValidate>
     <div class="row">
         <div class="col-sm-3">
-            <div class="card card-custom">
+            <div [ngClass]="{'error': !rForm.get('image_url').valid && rForm.get('image_url').touched}" class="card card-custom">
                 <img alt="100%x200" data-src="holder.js/100%x200" [src]="filePaths" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;"> 
                 <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" filetypefilter="video"  />
-                <input type="text" class="form-control" [(ngModel)]="imagePath" formControlName="image_url" /> 
+                <input type="hidden" class="form-control" [(ngModel)]="imagePath" readonly formControlName="image_url" /> 
 
                 <div class="caption" *ngFor="let item of uploader.queue">
                     <div class="progress" style="margin-bottom: 0;">
@@ -215,7 +215,7 @@
             <div class="row">
                 <div class="col text-right">
 
-                    <button  class="btn btn-info bottomAction" type="submit" role="button">Add Recipe</button>
+                    <button *ngIf="!isEdit" class="btn btn-info bottomAction" type="submit" role="button">Add Recipe</button>
                     <button *ngIf="isEdit" class="btn btn-info bottomAction" (click)="updateRecipe()" type="button" role="button">Update Recipe</button>
                 </div>
             </div>

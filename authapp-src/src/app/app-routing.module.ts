@@ -17,9 +17,9 @@ const appRoutes:Routes = [
     { path : "home", component: HomeComponent},
     { path : "recipe", component: RecipeComponent, children:[
         {path:"", component:RecipeItemsComponent},
-        {path:"new", component:RecipeNewComponent},
+        {path:"new", component:RecipeNewComponent, canActivate:[AuthGuardService]},
         {path:":id", component:RecipeDetailsComponent},
-        {path:":id/edit", component:RecipeNewComponent}
+        {path:":id/edit", component:RecipeNewComponent, canActivate:[AuthGuardService]}
     ]},
     { path : "register", component: RegisterComponent},
     { path : "login", component: LoginComponent},

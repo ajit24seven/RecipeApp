@@ -68,6 +68,8 @@ export class RecipeNewComponent implements OnInit {
         this.isEdit = true;
         this.postRecipe = data.recipe;  
         this.rForm.patchValue(this.postRecipe);
+        this.rForm.setControl('ingredients', this.fb.array(this.postRecipe.ingredients || [], Validators.required));
+        this.rForm.setControl('directions', this.fb.array(this.postRecipe.directions || [], Validators.required));
         this.filePaths = this.rForm.get('image_url').value;
         },
         err => {
@@ -88,7 +90,6 @@ export class RecipeNewComponent implements OnInit {
     this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
         let getFileDetails = JSON.parse(response); 
         this.filePaths = getFileDetails.fileObj.path ? getFileDetails.fileObj.path : this.postRecipe.image_url;
-        //this.uploader.clearQueue()
         this.rForm.patchValue({
           image_url: this.filePaths
         });
